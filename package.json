@@ -1,0 +1,23 @@
+{
+  "name": "wt",
+  "version": "1.0.0",
+  "description": "",
+  "main": "piaotian-parser.js",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "debug": "^2.6.8",
+    "follow-redirects": "^1.2.4",
+    "iconv-lite": "^0.4.18",
+    "is-buffer": "^1.1.5",
+    "ms": "^2.0.0",
+    "request-promise": "^4.2.1",
+    "url": "^0.11.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "wt create --watch --name piaotian-parser .\\piaotian-parser.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
