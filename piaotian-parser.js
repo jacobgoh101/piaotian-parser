@@ -29,7 +29,9 @@ module.exports = function(ctx, req, res) {
       $("script").remove();
       $("link").remove();
       $("style").remove();
-      $('div[align="center"]').remove();
+      if (articleUrl.indexOf(".html") > -1) {
+        $('div[align="center"]').remove();
+      }
       $("head").append(`
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -46,13 +48,13 @@ module.exports = function(ctx, req, res) {
         }
         </style>
         `);
-      $("body").append($(".toplink").clone());
       $("a").each((i, elem) => {
         let href = $(elem).attr("href");
         href = url.resolve(articleUrl, href);
         href = `https://${endpointUrl}/piaotian-parser?url=${href}`;
         $(elem).attr("href", href);
       });
+      $("body").append($(".toplink").clone());
       html = "<html>" + $("html").html() + "</html>";
       res.end(html);
     })
