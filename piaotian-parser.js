@@ -4,20 +4,22 @@ const cheerio = require("cheerio");
 const iconv = require("iconv-lite");
 const url = require("url");
 
-module.exports = function(ctx, req, res) {
-  res.writeHead(200, { "Content-Type": "text/html " });
+module.exports = function (ctx, req, res) {
+  res.writeHead(200, {
+    "Content-Type": "text/html "
+  });
   if (!ctx.query.url) {
     res.end("no url provided");
   }
   const articleUrl = ctx.query.url;
   const endpointUrl = ctx.headers.host;
   request({
-    url: articleUrl,
-    encoding: null,
-    timeout: 60000,
-    maxAttempts: 6000,
-    retryDelay: 1000
-  })
+      url: articleUrl,
+      encoding: null,
+      timeout: 60000,
+      maxAttempts: 6000,
+      retryDelay: 1000
+    })
     .then(HTML => {
       let html = HTML;
       html = iconv.decode(html, "gb2312");
@@ -46,6 +48,11 @@ module.exports = function(ctx, req, res) {
           font-size: 18px;
           padding: 0 10px;
         }
+        @media screen and (min-width: 768px) {
+          body {
+            font-size: 20px;
+          }
+        }
         </style>
         `);
       $("a").each((i, elem) => {
@@ -55,6 +62,11 @@ module.exports = function(ctx, req, res) {
         $(elem).attr("href", href);
       });
       $("body").append($(".toplink").clone());
+      $("body").prepend(`
+      <div class="clearfix">
+        <a style="display:block; float: right;" href="${articleUrl}" target="_blank">Original Url</a>
+      </div>
+      `);
       html = "<html>" + $("html").html() + "</html>";
       res.end(html);
     })
