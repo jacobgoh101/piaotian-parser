@@ -35,7 +35,7 @@ module.exports = function (ctx, req, res) {
         $('div[align="center"]').remove();
       }
       $("head").append(`
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.rawgit.com/ZachSaucier/Just-Read/d7090485/default-styles.css">
         <link rel="stylesheet" href="https://cdn.rawgit.com/ZachSaucier/8295d9dc926d7064ff0d4f3f04b35b55/raw/06a8cc03bbdbb7e36f7ae192f834226320f752cd/dark-theme.css">
@@ -51,6 +51,7 @@ module.exports = function (ctx, req, res) {
         @media screen and (min-width: 768px) {
           body {
             font-size: 20px;
+            color: #fff;
           }
         }
         </style>
