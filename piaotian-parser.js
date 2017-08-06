@@ -3,6 +3,7 @@ const request = require("request-promise");
 const cheerio = require("cheerio");
 const iconv = require("iconv-lite");
 const url = require("url");
+const HtmlMinify = require('htmlmin');
 
 module.exports = function (ctx, req, res) {
   res.writeHead(200, {
@@ -34,6 +35,7 @@ module.exports = function (ctx, req, res) {
       if (articleUrl.indexOf(".html") > -1) {
         $('div[align="center"]').remove();
       }
+      $('a:contains("返回目录")').attr('target', '_blank');
       $("head").append(`
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -69,6 +71,7 @@ module.exports = function (ctx, req, res) {
       </div>
       `);
       html = "<html>" + $("html").html() + "</html>";
+      html = HtmlMinify(html);
       res.end(html);
     })
     .catch(err => {

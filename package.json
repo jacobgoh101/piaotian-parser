@@ -7,6 +7,7 @@
     "cheerio": "^1.0.0-rc.2",
     "debug": "^2.6.8",
     "follow-redirects": "^1.2.4",
+    "htmlmin": "^0.0.7",
     "iconv-lite": "^0.4.18",
     "is-buffer": "^1.1.5",
     "ms": "^2.0.0",
